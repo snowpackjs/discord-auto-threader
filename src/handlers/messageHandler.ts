@@ -1,4 +1,4 @@
-import { Message, MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
+import { Message, MessageActionRow, MessageButton } from "discord.js";
 import { getConfig } from "../helpers/configHelpers";
 import { getRequiredPermissions } from "../helpers/permissionHelpers";
 
@@ -45,7 +45,7 @@ export async function handleMessageCreate(message: Message): Promise<void> {
 		: authorMember.nickname;
 
 	const thread = await message.startThread({
-		name: `${authorName} (${creationDate})`,
+		name: `${authorName.replace(/\(.*/, "").trim()} (${creationDate})`,
 		autoArchiveDuration: <60 | 1440 | 4320 | 10080 | "MAX"> config.threadArchiveDuration,
 	});
 
@@ -56,12 +56,13 @@ export async function handleMessageCreate(message: Message): Promise<void> {
 		.setEmoji("🗑️");
 
 	const buttonRow = new MessageActionRow().addComponents(closeButton);
-
-	const channelMention = `<#${channel.id}>`;
+	const teamMention = channel.id === "872579324446928896"
+		? "<@&857704834597650472>"
+		: "<@&857704834597650472> <@&882699029706862602>";
 	const relativeTimestamp = `<t:${Math.round(message.createdTimestamp / 1000)}:R>`;
 
 	await thread.send({
-		content: `Hello <@${authorUser.id}>! This helpful thread has been automatically created from your message in ${channelMention} ${relativeTimestamp}.\n\nWant to unsubscribe from this thread? Right-click the thread (or use the \`...\` menu) and select **Leave Thread**.\n\nIf you are done using this thread, you can click the button below to close this thread.`,
+		content: `Hey <@${authorUser.id}>! I've automatically created this helpful thread from your message ${relativeTimestamp}.\n\nPinging ${teamMention} so that they see this as well!\n\nWant to unsubscribe? Right-click the thread (or use the \`...\` menu) and select **Leave Thread**.`,
 		components: [buttonRow],
 	});
 
