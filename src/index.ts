@@ -48,7 +48,8 @@ CLIENT.on('messageCreate', async (message) => {
   });
 
   const channelMention = `<#${channel.id}>`;
-  const teamMention = channel.id === '872579324446928896' ? `<@&857704834597650472>` : `<@&857704834597650472> <@&882699029706862602>`;
+  const teamMention = `<@&857704834597650472>`; // testing
+  // const teamMention = channel.id === '872579324446928896' ? `<@&857704834597650472>` : `<@&857704834597650472> <@&882699029706862602>`;
   const relativeTimestamp = `<t:${Math.round(message.createdTimestamp / 1000)}:R>`;
 
   const threadMsg = await thread.send({
