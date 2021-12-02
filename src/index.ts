@@ -47,19 +47,19 @@ CLIENT.on('messageCreate', async (message) => {
     autoArchiveDuration: CONFIG.threadArchiveDurationInMinutes,
   });
 
-  const channelMention = `<#${channel.id}>`;
-  const teamMention = `<@&857704834597650472>`; // testing
-  // const teamMention = channel.id === '872579324446928896' ? `<@&857704834597650472>` : `<@&857704834597650472> <@&882699029706862602>`;
+  // const channelMention = `<#${channel.id}>`;
+  const teamMention = channel.id === '872579324446928896' ? `<@&857704834597650472>` : `<@&882699029706862602>`;
   const relativeTimestamp = `<t:${Math.round(message.createdTimestamp / 1000)}:R>`;
 
-  const threadMsg = await thread.send({
+  // const threadMsg = 
+  await thread.send({
     embeds: [], // [embed],
     content: `Hey <@${authorUser.id}>! I've automatically created this helpful thread from your message ${relativeTimestamp}.\n\nPinging ${teamMention} so that they see this as well!`,
   });
 
   // await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  const embed = new MessageEmbed().setAuthor(authorName, authorUser.displayAvatarURL()).setDescription(`Thanks, @user! :taco: :taco: :taco:`).setColor([0, 206, 201]);
+  // const embed = new MessageEmbed().setAuthor(authorName, authorUser.displayAvatarURL()).setDescription(`Thanks, @user! :taco: :taco: :taco:`).setColor([0, 206, 201]);
 
   // const tacosMention = await thread.send({
   // embeds: [embed],
