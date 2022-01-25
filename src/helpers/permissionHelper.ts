@@ -4,9 +4,11 @@ import { getConfig } from "../config/config";
 export function getRequiredPermissions(): bigint[] {
 	const config = getConfig();
 	const output = [
-		Permissions.FLAGS.USE_PUBLIC_THREADS,
-		Permissions.FLAGS.SEND_MESSAGES,
-		Permissions.FLAGS.READ_MESSAGE_HISTORY,
+            Permissions.FLAGS.VIEW_CHANNEL,
+            Permissions.FLAGS.SEND_MESSAGES,
+            Permissions.FLAGS.SEND_MESSAGES_IN_THREADS,
+            Permissions.FLAGS.CREATE_PUBLIC_THREADS,
+            Permissions.FLAGS.READ_MESSAGE_HISTORY,
 	];
 
 	if (config?.threadMessage?.shouldPin) {
